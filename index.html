@@ -519,8 +519,25 @@ const CASES = [
    voice:"2回目施術の後からヘアファンデを使わなくなりました。勇気を出してお願いして本当によかったです。"}
 ];
 
+/* 各症例に固定の連番IDを付与（画像ファイル名に対応：case01, case02 …） */
+CASES.forEach((c, idx) => c.id = "case" + String(idx + 1).padStart(2, "0"));
+
 /* ---------------- render ---------------- */
 const list = document.getElementById('caseList');
+
+/* Before/After セル。images/caseNN-before.jpg → .png → プレースホルダーの順に自動表示 */
+function baCell(c, kind){
+  const label = kind === "before" ? "Before" : "After";
+  const jpg = `images/${c.id}-${kind}.jpg`;
+  const png = `images/${c.id}-${kind}.png`;
+  const onerr = `if(!this.dataset.t){this.dataset.t=1;this.src='${png}';}`
+              + `else{this.style.display='none';this.nextElementSibling.style.display='flex';}`;
+  return `<div class="ba-cell ${kind}">
+            <span class="ba-lab">${label}</span>
+            <img src="${jpg}" alt="施術${kind === "before" ? "前" : "後"}" onerror="${onerr}">
+            <div class="ba-ph" style="display:none">${label.toUpperCase()}</div>
+          </div>`;
+}
 function render(filter){
   list.innerHTML = "";
   CASES.filter(c => filter==="all" || c.tags.includes(filter)).forEach((c,i)=>{
@@ -533,14 +550,8 @@ function render(filter){
         <span class="case-who">${c.who}</span>
       </div>
       <div class="ba">
-        <div class="ba-cell before"><span class="ba-lab">Before</span>
-          <!-- 実写真を差し込む場合: <img src="..." alt="施術前"> -->
-          <div class="ba-ph">BEFORE</div>
-        </div>
-        <div class="ba-cell after"><span class="ba-lab">After</span>
-          <!-- 実写真を差し込む場合: <img src="..." alt="施術後"> -->
-          <div class="ba-ph">AFTER</div>
-        </div>
+        ${baCell(c, "before")}
+        ${baCell(c, "after")}
       </div>
       <div class="case-body">
         <h3 class="case-title">${c.title}</h3>
