@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>頭皮アートメイク ｜ 自然な仕上がりの専門施術</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Zen+Old+Mincho:wght@400;500;600;700&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* --- greige palette, elevated from the client's rough --- */
+    --pearl:      #F3F0EB;   /* page base */
+    --sand:       #E7E1D8;   /* raised cards */
+    --taupe:      #D3CABE;   /* section blocks */
+    --stone:      #A79F95;   /* the rough's characteristic mid-grey */
+    --stone-deep: #8C857B;
+    --ink:        #36322D;   /* primary text */
+    --ink-soft:   #6C655B;   /* secondary text */
+    --line:       #C9C0B4;
+    --clay:       #BE896B;   /* the single warm accent — patient voice + CTA */
+    --clay-soft:  #D8B9A3;
+    --white:      #FBFAF7;
+
+    --serif: "Cormorant Garamond", serif;
+    --mincho: "Zen Old Mincho", serif;
+    --gothic: "Zen Kaku Gothic New", sans-serif;
+
+    --col: 468px;         /* phone-LP column width */
+    --ease: cubic-bezier(.22,.61,.36,1);
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+  body{
+    font-family:var(--gothic);
+    color:var(--ink);
+    background:var(--stone);
+    line-height:1.9;
+    letter-spacing:.02em;
+    font-weight:300;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ambient backdrop on wide screens; the LP itself is a centered phone column */
+  .frame{
+    max-width:var(--col);
+    margin:0 auto;
+    background:var(--pearl);
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 30px 90px -30px rgba(40,36,30,.55);
+  }
+
+  /* ---------- shared bits ---------- */
+  .eyebrow{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:11px;
+    letter-spacing:.42em;
+    text-transform:uppercase;
+    color:var(--stone-deep);
+  }
+  .rule{ width:38px; height:1px; background:var(--clay); border:0; }
+  .section{ padding:74px 30px; }
+  .section-tight{ padding:56px 30px; }
+
+  /* dot-density divider — the signature motif, sparse→dense */
+  .dotband{
+    height:60px;
+    background-image:radial-gradient(var(--stone) 1px, transparent 1.4px);
+    background-size:13px 13px;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 45%,#000 55%,transparent);
+    mask-image:linear-gradient(90deg,transparent,#000 45%,#000 55%,transparent);
+    opacity:.5;
+  }
+
+  /* =========================================================
+     HERO
+     ========================================================= */
+  .hero{
+    position:relative;
+    padding:64px 30px 54px;
+    background:
+      radial-gradient(120% 80% at 50% -10%, rgba(255,255,255,.6), transparent 60%),
+      var(--pearl);
+    overflow:hidden;
+  }
+  #dots{ position:absolute; inset:0; width:100%; height:100%; display:block; }
+  .hero-inner{ position:relative; z-index:2; }
+  .hero .eyebrow{ display:block; margin-bottom:26px; }
+  .hero-brand{
+    font-family:var(--serif);
+    font-size:15px;
+    letter-spacing:.3em;
+    color:var(--ink-soft);
+    text-transform:uppercase;
+  }
+  .hero h1{
+    font-family:var(--mincho);
+    font-weight:500;
+    font-size:33px;
+    line-height:1.55;
+    letter-spacing:.06em;
+    margin:22px 0 20px;
+  }
+  .hero h1 .thin{ display:block; font-size:23px; color:var(--ink-soft); font-weight:400; margin-top:10px; }
+  .hero-lead{
+    font-size:14px;
+    color:var(--ink-soft);
+    max-width:30em;
+    margin-bottom:38px;
+  }
+  /* credential — a quiet stat, not a template hero number */
+  .cred{
+    display:flex; align-items:baseline; gap:14px;
+    padding-top:26px; border-top:1px solid var(--line);
+  }
+  .cred-num{ font-family:var(--serif); font-size:52px; font-weight:500; line-height:.9; color:var(--ink); }
+  .cred-num small{ font-size:19px; }
+  .cred-txt{ font-family:var(--mincho); font-size:13px; line-height:1.7; color:var(--ink-soft); }
+  .cred-since{ display:block; font-family:var(--serif); letter-spacing:.15em; font-size:11px; color:var(--clay); }
+
+  /* =========================================================
+     CONCERNS — わたしに近い症例を
+     ========================================================= */
+  .concern{ background:var(--sand); }
+  .concern h2{
+    font-family:var(--mincho); font-weight:500; font-size:27px;
+    letter-spacing:.08em; line-height:1.5; margin:18px 0 6px;
+  }
+  .concern h2 .en{
+    display:block; font-family:var(--serif); font-size:12px; letter-spacing:.3em;
+    text-transform:uppercase; color:var(--clay); margin-bottom:14px; font-weight:600;
+  }
+  .concern p.sub{ font-size:13px; color:var(--ink-soft); margin-bottom:30px; }
+  .grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:11px; }
+  .chip{
+    appearance:none; border:1px solid var(--line); background:var(--white);
+    font-family:var(--mincho); font-size:15px; letter-spacing:.12em; color:var(--ink);
+    padding:20px 6px; border-radius:2px; cursor:pointer;
+    display:flex; flex-direction:column; align-items:center; gap:9px;
+    transition:.35s var(--ease);
+  }
+  .chip .dotmark{
+    width:26px; height:26px; border-radius:50%;
+    background-image:radial-gradient(var(--stone-deep) .8px, transparent 1px);
+    background-size:5px 5px; opacity:.7;
+    transition:.35s var(--ease);
+  }
+  .chip:hover, .chip:focus-visible{ background:var(--ink); color:var(--white); border-color:var(--ink); transform:translateY(-2px); }
+  .chip:hover .dotmark, .chip:focus-visible .dotmark{ background-image:radial-gradient(var(--clay-soft) .9px, transparent 1.1px); opacity:1; }
+
+  /* =========================================================
+     COURSES — density encodes coverage
+     ========================================================= */
+  .courses{ background:var(--pearl); }
+  .courses .head{ text-align:center; margin-bottom:40px; }
+  .courses h2{
+    font-family:var(--mincho); font-weight:500; font-size:25px; letter-spacing:.09em; margin:16px 0 8px;
+  }
+  .courses .head p{ font-size:13px; color:var(--ink-soft); }
+  .course{
+    border:1px solid var(--line); border-radius:3px; background:var(--white);
+    padding:26px 24px; margin-bottom:16px; position:relative; overflow:hidden;
+  }
+  .course-top{ display:flex; align-items:center; justify-content:space-between; gap:14px; margin-bottom:14px; }
+  .course-name{ font-family:var(--serif); font-size:20px; letter-spacing:.14em; text-transform:uppercase; font-weight:600; color:var(--ink); }
+  .course-name span{ display:block; font-family:var(--mincho); font-size:12px; letter-spacing:.1em; color:var(--ink-soft); text-transform:none; margin-top:3px; }
+  .density{ width:72px; height:40px; border-radius:2px; background:var(--sand); position:relative; flex:none; overflow:hidden; }
+  .density::after{
+    content:""; position:absolute; inset:0;
+    background-image:radial-gradient(var(--ink) 1px, transparent 1.3px);
+  }
+  .d1::after{ background-size:11px 11px; opacity:.55; }
+  .d2::after{ background-size:8px 8px;  opacity:.7; }
+  .d3::after{ background-size:5.5px 5.5px; opacity:.9; }
+  .course p{ font-size:13px; color:var(--ink-soft); line-height:1.85; }
+  .course .tag{ display:inline-block; font-family:var(--mincho); font-size:11px; letter-spacing:.1em; color:var(--clay); border:1px solid var(--clay-soft); border-radius:999px; padding:3px 12px; margin-bottom:12px; }
+
+  /* =========================================================
+     CASE STUDIES
+     ========================================================= */
+  .cases{ background:var(--taupe); }
+  .cases .head{ text-align:center; margin-bottom:8px; }
+  .cases .eyebrow{ color:var(--ink-soft); }
+  .cases h2{ font-family:var(--serif); font-size:40px; letter-spacing:.06em; font-weight:500; margin:8px 0 4px; }
+  .cases .head .jp{ font-family:var(--mincho); font-size:13px; letter-spacing:.2em; color:var(--ink-soft); }
+
+  .filters{
+    display:flex; flex-wrap:wrap; gap:8px; justify-content:center;
+    margin:30px 0 34px;
+  }
+  .filter{
+    appearance:none; cursor:pointer; font-family:var(--mincho); font-size:12.5px; letter-spacing:.08em;
+    color:var(--ink-soft); background:transparent; border:1px solid var(--line);
+    padding:7px 15px; border-radius:999px; transition:.3s var(--ease);
+  }
+  .filter[aria-pressed="true"]{ background:var(--ink); color:var(--white); border-color:var(--ink); }
+  .filter:hover{ border-color:var(--ink); color:var(--ink); }
+  .filter[aria-pressed="true"]:hover{ color:var(--white); }
+
+  .case{
+    background:var(--pearl); border-radius:4px; overflow:hidden;
+    margin-bottom:20px; box-shadow:0 12px 30px -22px rgba(40,36,30,.5);
+  }
+  .case-head{ display:flex; align-items:center; justify-content:space-between; gap:10px; padding:20px 22px 0; }
+  .case-course{ font-family:var(--serif); font-size:12px; letter-spacing:.22em; text-transform:uppercase; color:var(--clay); font-weight:600; }
+  .case-who{ font-family:var(--mincho); font-size:12px; letter-spacing:.14em; color:var(--white); background:var(--stone-deep); padding:5px 12px; border-radius:2px; }
+
+  /* before / after frame — drop real photos into .ba-img */
+  .ba{ display:grid; grid-template-columns:1fr 1fr; margin:16px 0 0; position:relative; }
+  .ba-cell{ position:relative; aspect-ratio:3/4; background:var(--sand); overflow:hidden; }
+  .ba-cell img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .ba-ph{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    background-image:radial-gradient(var(--stone) 1px, transparent 1.3px); background-size:12px 12px;
+    color:var(--stone-deep); font-family:var(--serif); font-size:11px; letter-spacing:.2em;
+  }
+  .ba-lab{ position:absolute; top:12px; font-family:var(--serif); font-size:14px; letter-spacing:.1em; color:var(--ink); z-index:3; background:rgba(251,250,247,.82); padding:2px 10px; border-radius:2px; }
+  .ba-cell.before .ba-lab{ left:12px; }
+  .ba-cell.after  .ba-lab{ right:12px; }
+
+  .case-body{ padding:22px; }
+  .case-title{ font-family:var(--mincho); font-weight:500; font-size:18px; line-height:1.6; letter-spacing:.04em; margin-bottom:12px; }
+  .case-desc{ font-size:13px; color:var(--ink-soft); line-height:1.9; }
+  .voice{ margin-top:18px; }
+  .voice-lab{
+    display:inline-block; font-family:var(--mincho); font-size:12px; letter-spacing:.28em;
+    color:var(--white); background:var(--clay); padding:6px 16px; border-radius:2px; margin-bottom:12px;
+  }
+  .voice p{ font-size:13px; color:var(--ink-soft); line-height:1.9; }
+  .voice cite{ display:block; font-style:normal; font-size:11px; color:var(--stone-deep); margin-top:8px; font-family:var(--serif); letter-spacing:.06em; }
+
+  /* =========================================================
+     PHILOSOPHY
+     ========================================================= */
+  .phil{ background:var(--ink); color:var(--pearl); }
+  .phil .eyebrow{ color:var(--clay-soft); }
+  .phil h2{ font-family:var(--mincho); font-weight:500; font-size:24px; line-height:1.6; letter-spacing:.06em; margin:16px 0 30px; }
+  .phil-item{ padding:22px 0; border-top:1px solid rgba(255,255,255,.14); }
+  .phil-item:last-child{ border-bottom:1px solid rgba(255,255,255,.14); }
+  .phil-item h3{ font-family:var(--mincho); font-weight:500; font-size:16px; letter-spacing:.08em; margin-bottom:8px; display:flex; gap:12px; align-items:baseline; }
+  .phil-item h3 em{ font-family:var(--serif); font-style:italic; font-size:15px; color:var(--clay-soft); }
+  .phil-item p{ font-size:13px; color:rgba(243,240,235,.72); line-height:1.9; }
+
+  /* =========================================================
+     CTA
+     ========================================================= */
+  .cta{ background:var(--sand); text-align:center; }
+  .cta h2{ font-family:var(--mincho); font-weight:500; font-size:24px; line-height:1.6; letter-spacing:.06em; margin:18px 0 14px; }
+  .cta p{ font-size:13px; color:var(--ink-soft); margin-bottom:32px; }
+  .btns{ display:flex; flex-direction:column; gap:12px; }
+  .btn{
+    display:flex; align-items:center; justify-content:center; gap:10px;
+    font-family:var(--mincho); font-size:15px; letter-spacing:.14em; text-decoration:none;
+    padding:18px; border-radius:3px; transition:.35s var(--ease);
+  }
+  .btn-primary{ background:var(--clay); color:var(--white); }
+  .btn-primary:hover{ background:#a9744f; transform:translateY(-2px); }
+  .btn-ghost{ background:transparent; color:var(--ink); border:1px solid var(--ink); }
+  .btn-ghost:hover{ background:var(--ink); color:var(--white); }
+  .btn .en{ font-family:var(--serif); font-size:11px; letter-spacing:.2em; opacity:.8; text-transform:uppercase; }
+
+  footer{ background:var(--ink); color:rgba(243,240,235,.6); text-align:center; padding:34px 30px; }
+  footer .fb{ font-family:var(--serif); font-size:14px; letter-spacing:.28em; color:var(--pearl); text-transform:uppercase; margin-bottom:8px; }
+  footer small{ font-size:11px; letter-spacing:.08em; }
+
+  /* ---------- reveal animation ---------- */
+  .reveal{ opacity:0; transform:translateY(22px); transition:opacity .9s var(--ease), transform .9s var(--ease); }
+  .reveal.in{ opacity:1; transform:none; }
+
+  @media (prefers-reduced-motion:reduce){
+    .reveal{ opacity:1; transform:none; transition:none; }
+    html{ scroll-behavior:auto; }
+  }
+  @media (max-width:380px){
+    .section{ padding:60px 22px; }
+    .hero{ padding:52px 22px 46px; }
+    .hero h1{ font-size:29px; }
+    .grid{ gap:8px; }
+    .chip{ font-size:14px; padding:16px 4px; }
+  }
+</style>
+</head>
+<body>
+<div class="frame">
+
+  <!-- ================= HERO ================= -->
+  <header class="hero">
+    <canvas id="dots"></canvas>
+    <div class="hero-inner">
+      <span class="hero-brand">Scalp Art Make</span>
+      <h1>
+        分け目に、生え際に、<br>もう一度の密度を。
+        <span class="thin">頭皮アートメイク・プロフェッショナル</span>
+      </h1>
+      <p class="hero-lead">
+        地肌の透け感を、一つひとつのドットで自然に。ヘアファンデーションや毎朝のセットに費やしていた時間から、そっと解放するための施術です。
+      </p>
+      <div class="cred">
+        <div class="cred-num">1000<small>+</small></div>
+        <div class="cred-txt">
+          頭皮アートメイク施術<br>累計症例数
+          <span class="cred-since">Pioneer since Feb. 2022</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="dotband"></div>
+
+  <!-- ================= CONCERNS ================= -->
+  <section class="section concern reveal">
+    <h2>
+      <span class="en">Your concern</span>
+      わたしに近い症例を。
+    </h2>
+    <p class="sub">気になるお悩みから、近い症例をご覧いただけます。</p>
+    <div class="grid" id="concernGrid">
+      <button class="chip" data-jump="分け目"><span class="dotmark"></span>分け目</button>
+      <button class="chip" data-jump="つむじ"><span class="dotmark"></span>つむじ</button>
+      <button class="chip" data-jump="生え際"><span class="dotmark"></span>生え際</button>
+      <button class="chip" data-jump="透け感"><span class="dotmark"></span>抜毛・透け</button>
+      <button class="chip" data-jump="傷跡"><span class="dotmark"></span>傷跡</button>
+      <button class="chip" data-jump="他院修正"><span class="dotmark"></span>他院修正</button>
+    </div>
+  </section>
+
+  <!-- ================= COURSES ================= -->
+  <section class="section courses reveal">
+    <div class="head">
+      <span class="eyebrow">Course</span>
+      <h2>施術範囲で選ぶ、3つのコース</h2>
+      <p>お悩みの広さと髪質に合わせ、ドットの密度と範囲を設計します。</p>
+    </div>
+
+    <div class="course">
+      <div class="course-top">
+        <div class="course-name">Standard<span>スタンダードコース</span></div>
+        <div class="density d1"></div>
+      </div>
+      <span class="tag">分け目・部分的なお悩みに</span>
+      <p>分け目やつむじなど、範囲を限定したお悩みに。髪の色味と太さに合わせて色素とドットを調整し、多くは1時間／回・2回程度で仕上げます。</p>
+    </div>
+
+    <div class="course">
+      <div class="course-top">
+        <div class="course-name">Wide<span>ワイドコース</span></div>
+        <div class="density d2"></div>
+      </div>
+      <span class="tag">横幅を広く・デザインを重視</span>
+      <p>分け目を変えたい方や、横に広くカバーしたい方へ。全体のバランスを見ながらデザインし、未施術部分との境目が目立たないよう自然に馴染ませます。</p>
+    </div>
+
+    <div class="course">
+      <div class="course-top">
+        <div class="course-name">Wide&nbsp;Plus<span>ワイドプラスコース</span></div>
+        <div class="density d3"></div>
+      </div>
+      <span class="tag">広範囲・細い髪・高密度に</span>
+      <p>広い透け感や細く繊細な髪に。3回に分けて少しずつ密度を重ねることで、黒さの密度が十分に積み上がり、時間が経っても自然な仕上がりが続きます。</p>
+    </div>
+  </section>
+
+  <div class="dotband"></div>
+
+  <!-- ================= CASE STUDIES ================= -->
+  <section class="section cases">
+    <div class="head reveal">
+      <span class="eyebrow">Case Studies</span>
+      <h2>Case Studies</h2>
+      <div class="jp">/ 症例・解説</div>
+    </div>
+
+    <div class="filters reveal" id="filters" role="group" aria-label="症例の絞り込み">
+      <button class="filter" data-f="all" aria-pressed="true">すべて</button>
+      <button class="filter" data-f="分け目" aria-pressed="false">分け目</button>
+      <button class="filter" data-f="つむじ" aria-pressed="false">つむじ</button>
+      <button class="filter" data-f="生え際" aria-pressed="false">生え際</button>
+      <button class="filter" data-f="透け感" aria-pressed="false">透け感</button>
+      <button class="filter" data-f="傷跡" aria-pressed="false">傷跡</button>
+      <button class="filter" data-f="他院修正" aria-pressed="false">他院修正</button>
+    </div>
+
+    <div id="caseList"></div>
+  </section>
+
+  <!-- ================= PHILOSOPHY ================= -->
+  <section class="section phil reveal">
+    <span class="eyebrow">Our craft</span>
+    <h2>「自然さ」は、<br>ドットの一粒から。</h2>
+
+    <div class="phil-item">
+      <h3><em>01</em> ドットサイズのコントロール</h3>
+      <p>大きすぎるドットは不自然さや滲みの原因に。髪の色味・太さ、そして地肌の状態に合わせて、一粒ずつサイズを見極めます。</p>
+    </div>
+    <div class="phil-item">
+      <h3><em>02</em> 全体をデザインする</h3>
+      <p>一部だけを埋めると、かえって境目が目立つことがあります。分け目やつむじの流れまで含めて、全体像から設計します。</p>
+    </div>
+    <div class="phil-item">
+      <h3><em>03</em> 頭皮ケアも、二人三脚で</h3>
+      <p>ドットの発色は、その上に被さる皮膚のコンディションに左右されます。ご自宅での保湿ケアも並行しながら、仕上がりを育てます。</p>
+    </div>
+  </section>
+
+  <!-- ================= CTA ================= -->
+  <section class="section cta reveal">
+    <span class="eyebrow">Reservation</span>
+    <h2>まずは、お悩みを<br>聞かせてください。</h2>
+    <p>仕上がりのイメージを丁寧にお伝えし、ご納得いただいた上で進めます。</p>
+    <div class="btns">
+      <a class="btn btn-primary" href="#">ご予約・カウンセリング<span class="en">Booking</span></a>
+      <a class="btn btn-ghost" href="#">LINEで相談する<span class="en">LINE</span></a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="fb">Scalp Art Make</div>
+    <small>頭皮アートメイク・プロフェッショナル</small>
+  </footer>
+
+</div>
+
+<script>
+/* ---------------- case data (from the rough) ---------------- */
+const CASES = [
+  {course:"Standard", who:"30代 女性", tags:["分け目"],
+   title:"髪は太いが、分け目の幅が広いことが悩み",
+   desc:"髪が黒く太めで地肌との色差が出やすいケース。色味と太さに合わせて色素は濃いめ、ドットも毛根大サイズに調整。1時間／回・2回で完成しました。",
+   voice:"以前は分け目を左にすることしかできなかったので、分け目を変えたヘアスタイルも楽しめて嬉しいです。"},
+
+  {course:"Standard", who:"20代 女性", tags:["分け目","透け感"],
+   title:"髪が細く、周りからも指摘されるように",
+   desc:"分け目の広さにお悩みの方。普段から茶髪に染めることが多いため、ドットを大きくしすぎないよう調整。茶髪でもサイズが不自然でなければ自然に馴染みます。",
+   voice:"光の下や写真を撮ったときの分け目の幅が気になっていましたが、気になる時間がぐっと軽減されました。"},
+
+  {course:"Wide", who:"30代 女性", tags:["分け目","透け感"],
+   title:"ドラッグストアの鏡で、分け目が透けて見えた",
+   desc:"いろんな分け目にしたいとのご希望から、横幅を広めにデザイン。髪自体の密度も高く、2回の施術で完成となりました。",
+   voice:"悩みが解消されて本当に嬉しいです。丁寧な施術と確かな技術でした。", cite:"Google マップ 口コミより抜粋"},
+
+  {course:"Wide", who:"30代 女性", tags:["透け感","つむじ"],
+   title:"毎日のヘアセットに時間がかかることが悩み",
+   desc:"年齢とともに分け目の透け感が目立ち、セットが思うようにいかなくなった方。即日変化が見られる点に魅力を感じご来院。",
+   voice:"毎朝のセット時間が軽減されて本当に楽になりました。茶髪ですが、どこに施術があるのか自分でもわからないくらい自然です。"},
+
+  {course:"Wide", who:"50代 女性", tags:["透け感","つむじ"],
+   title:"ヘアファンデーションを外したい",
+   desc:"分け目の前方から後頭部のつむじにかけての透け感にお悩み。ご職業柄、日中のヘアファンデが難しく「毎日から卒業したい」との思いから施術を選択されました。",
+   voice:"施術をしたという満足感から、手放せなかったヘアファンデも使わなくなりました。気持ち的にもすごく軽くなりました。"},
+
+  {course:"Wide", who:"30代 女性", tags:["傷跡"],
+   title:"頭頂部にある横長の傷跡を隠したい",
+   desc:"傷跡の皮膚は正常な組織と状態が異なるため、ドットの大きさに細心の注意を払い、傷跡部分と周辺組織で技法を使い分けて施術。事前カウンセリングで仕上がりを丁寧に共有します。"},
+
+  {course:"Wide", who:"30代 女性", tags:["他院修正"],
+   title:"他院でドットが不自然に大きくなってしまった",
+   desc:"通いやすさを重視して他サロンで施術し、ドットが過度に大きくインクが滲んでしまったケース。ドットの大きさを適切にコントロールし、全体デザインから周囲に自然に馴染ませます。"},
+
+  {course:"Wide Plus", who:"30代 女性", tags:["つむじ"],
+   title:"後頭部のつむじ割れが気になる",
+   desc:"後頭部がVの字に割れることにお悩み。初回は頭皮が硬く乾燥していたため、ご自宅での毎日の保湿ケアと並行して施術。皮膚のコンディションが発色を左右します。"},
+
+  {course:"Wide Plus", who:"30代 女性", tags:["つむじ","透け感"],
+   title:"後頭部はヘアファンデがうまくつけられず困っている",
+   desc:"髪が細く全体の透け感にお悩み。自分の目で確認しづらい後頭部のつむじ割れのセットに毎朝苦労されていた方。SNSで施術を知りご来院くださいました。"},
+
+  {course:"Standard", who:"40代 女性", tags:["分け目"],
+   title:"髪を結んだときの、分け目の前が気になる",
+   desc:"今後分け目を変える可能性があるとのことで、施術範囲の横を広めに設定。しっかり埋めたいとのご希望からドットもやや大きめに調整しました。",
+   voice:"1回でもかなり変化が見られました。2回施術で一度様子を見ます。"},
+
+  {course:"Wide Plus", who:"30代 女性", tags:["透け感"],
+   title:"ヘアセットをするたびに透け感が気になる",
+   desc:"人と会う機会が多く、視線や透け感を気にされていた方。加齢で細くなった現在の髪の太さに合わせ、周囲に溶け込む非常に繊細なドットを一つひとつ配置しました。"},
+
+  {course:"Wide Plus", who:"60代 女性", tags:["透け感"],
+   title:"ヘアピースを外したい",
+   desc:"普段ヘアピースをつけて生活されていた方。少しでもつける回数を減らしたいという想いから、美容師さんと相談を重ねアートメイクをご決断いただきました。",
+   voice:"ヘアファンデの量も以前よりかなり減り、とても嬉しく感じています。早く美容師さんにも見てもらいたいです。"},
+
+  {course:"Wide Plus", who:"30代 女性", tags:["透け感"],
+   title:"ヘアファンデーションをつけずに生活したい",
+   desc:"もともと髪が細く繊細で、広範囲の透け感がお悩み。細く広い範囲は、3回に分けて少しずつ密度を重ねることで自然な仕上がりと高い満足度につながります。"},
+
+  {course:"Wide Plus", who:"20代 女性", tags:["透け感"],
+   title:"写真や上から見られたときの透け感が気になる",
+   desc:"薄毛治療に時間もお金もかけたが効果が出ず、仕上がりの自然さを重視してご来院。頭皮が硬く発色が弱めの傾向があり、生活習慣の見直しや保湿ケアも提案し二人三脚で。"},
+
+  {course:"Wide Plus", who:"50代 女性", tags:["透け感"],
+   title:"エレベーターのモニターで透け感が気になる",
+   desc:"薄毛治療薬の継続が難しくなり、ウィッグを使う前にカバーしたいとご来院。地肌と同系色の白髪がドットに被ると効果を実感しにくいため、白髪染めの並行を提案しました。"},
+
+  {course:"Wide Plus", who:"60代 女性", tags:["傷跡"],
+   title:"ヘアクリップの傷跡を隠したい",
+   desc:"長年ウィッグのクリップ使用で、その部分の脱毛にお悩み。自毛植毛後も密度に満足がいかず決断。しっかり隙間を埋めたいとのご要望から、ドットを大きめ・高密度に調整。",
+   voice:"気になっていた透け感が軽減され、気持ちも軽くなりました。これを機にもう一度、発毛・育毛も頑張ってみようと思います。"},
+
+  {course:"Wide Plus", who:"30代 女性", tags:["つむじ","透け感"],
+   title:"髪を結ぶときの三角ゾーンが気になる",
+   desc:"髪が細く、人と話すときの目線も気になる方。繊細なドットだけではカモフラージュが弱くなるため、段階を踏んでドットサイズを調整。3回でみっちりと仕上がりました。",
+   voice:"ヘアファンデの量も減り、美容師さんも「変わったね…!」と一緒に喜んでくれました。"},
+
+  {course:"Wide Plus", who:"60代 男性", tags:["生え際"],
+   title:"かっこいいおじいちゃんでいたい",
+   desc:"10年以上前に生え際から頭頂部にかけて植毛された方。密度とボリュームを補いたいとのことで、生え際から後頭部のつむじまで全体を施術。光の反射による自然な白さはあえて残します。",
+   voice:"後ろから見られても、全く人の目が気にならなくなりました。生え際も暗くなり、気になることがぐっと減りました！"},
+
+  {course:"Wide Plus", who:"50代 男性", tags:["つむじ"],
+   title:"妻や娘に指摘され、気になるように",
+   desc:"全体的な毛量が減っていることがお悩みで、生え際〜つむじにかけて頭頂部全体を施術。※光の反射のみで透ける場合は、髪そのものを増やす治療が有効なこともあります。",
+   voice:"家族には伝えずに施術にきました。気づかれずにつむじが埋まり満足です。"},
+
+  {course:"Wide", who:"30代 男性", tags:["つむじ"],
+   title:"分け目が変わっても、つむじ割れが気にならないように",
+   desc:"病気をきっかけに発毛薬を断薬され、以前より透け感が気になるようになった方。毎朝ヘアファンデで後頭部を隠す時間にお悩みでした。",
+   voice:"2回目施術の後からヘアファンデを使わなくなりました。勇気を出してお願いして本当によかったです。"}
+];
+
+/* ---------------- render ---------------- */
+const list = document.getElementById('caseList');
+function render(filter){
+  list.innerHTML = "";
+  CASES.filter(c => filter==="all" || c.tags.includes(filter)).forEach((c,i)=>{
+    const el = document.createElement('article');
+    el.className = 'case reveal';
+    el.style.transitionDelay = (i%3*70)+'ms';
+    el.innerHTML = `
+      <div class="case-head">
+        <span class="case-course">${c.course}</span>
+        <span class="case-who">${c.who}</span>
+      </div>
+      <div class="ba">
+        <div class="ba-cell before"><span class="ba-lab">Before</span>
+          <!-- 実写真を差し込む場合: <img src="..." alt="施術前"> -->
+          <div class="ba-ph">BEFORE</div>
+        </div>
+        <div class="ba-cell after"><span class="ba-lab">After</span>
+          <!-- 実写真を差し込む場合: <img src="..." alt="施術後"> -->
+          <div class="ba-ph">AFTER</div>
+        </div>
+      </div>
+      <div class="case-body">
+        <h3 class="case-title">${c.title}</h3>
+        <p class="case-desc">${c.desc}</p>
+        ${c.voice ? `<div class="voice">
+            <span class="voice-lab">患者様の声</span>
+            <p>${c.voice}${c.cite?`<cite>— ${c.cite}</cite>`:''}</p>
+          </div>` : ''}
+      </div>`;
+    list.appendChild(el);
+  });
+  observeReveal();
+}
+
+/* ---------------- filters ---------------- */
+document.getElementById('filters').addEventListener('click', e=>{
+  const b = e.target.closest('.filter'); if(!b) return;
+  document.querySelectorAll('.filter').forEach(f=>f.setAttribute('aria-pressed', f===b));
+  render(b.dataset.f);
+});
+
+/* concern chips jump to filtered cases */
+document.getElementById('concernGrid').addEventListener('click', e=>{
+  const b = e.target.closest('.chip'); if(!b) return;
+  const t = b.dataset.jump;
+  const target = document.querySelector(`.filter[data-f="${t}"]`) || document.querySelector('.filter[data-f="all"]');
+  document.querySelectorAll('.filter').forEach(f=>f.setAttribute('aria-pressed', f===target));
+  render(target.dataset.f);
+  document.querySelector('.cases').scrollIntoView({behavior:'smooth'});
+});
+
+/* ---------------- reveal on scroll ---------------- */
+let io;
+function observeReveal(){
+  io = io || new IntersectionObserver((es)=>{
+    es.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+  },{threshold:.12, rootMargin:"0px 0px -8% 0px"});
+  document.querySelectorAll('.reveal:not(.in)').forEach(el=>io.observe(el));
+}
+
+/* ---------------- hero dot field ---------------- */
+(function(){
+  const c = document.getElementById('dots');
+  const reduce = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const ctx = c.getContext('2d');
+  let w,h,dpr, pts=[];
+  function size(){
+    dpr = Math.min(window.devicePixelRatio||1, 2);
+    w = c.clientWidth; h = c.clientHeight;
+    c.width = w*dpr; c.height = h*dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
+    build();
+  }
+  function build(){
+    pts = [];
+    const n = Math.round(w*h/2600);
+    for(let i=0;i<n;i++){
+      // density biased toward the lower band, echoing a scalp "fill"
+      const y = Math.pow(Math.random(),1.5)*h;
+      pts.push({x:Math.random()*w, y, r:Math.random()*1.1+.5, a:0, ta:Math.random()*.5+.12, sp:Math.random()*.006+.002});
+    }
+  }
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+    for(const p of pts){
+      if(p.a < p.ta) p.a += p.sp;
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(120,112,102,${p.a})`;
+      ctx.arc(p.x,p.y,p.r,0,6.283); ctx.fill();
+    }
+    if(!reduce) requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize', size, {passive:true});
+  size();
+  if(reduce){ pts.forEach(p=>p.a=p.ta); }
+  draw();
+})();
+
+render("all");
+observeReveal();
+</script>
+</body>
+</html>
