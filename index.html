@@ -208,18 +208,14 @@
   .case-course{ font-family:var(--serif); font-size:12px; letter-spacing:.22em; text-transform:uppercase; color:var(--clay); font-weight:600; }
   .case-who{ font-family:var(--mincho); font-size:12px; letter-spacing:.14em; color:var(--white); background:var(--stone-deep); padding:5px 12px; border-radius:2px; }
 
-  /* before / after frame — drop real photos into .ba-img */
-  .ba{ display:grid; grid-template-columns:1fr 1fr; margin:16px 0 0; position:relative; }
-  .ba-cell{ position:relative; aspect-ratio:3/4; background:var(--sand); overflow:hidden; }
-  .ba-cell img{ width:100%; height:100%; object-fit:cover; display:block; }
-  .ba-ph{
-    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  /* 症例写真 — Before/After が合成済みの画像を、そのまま1枚で表示 */
+  .shot{ margin-top:16px; background:var(--sand); position:relative; }
+  .shot img{ width:100%; height:auto; display:block; }
+  .shot-ph{
+    aspect-ratio:3/2; display:flex; align-items:center; justify-content:center;
     background-image:radial-gradient(var(--stone) 1px, transparent 1.3px); background-size:12px 12px;
-    color:var(--stone-deep); font-family:var(--serif); font-size:11px; letter-spacing:.2em;
+    color:var(--stone-deep); font-family:var(--serif); font-size:11px; letter-spacing:.24em;
   }
-  .ba-lab{ position:absolute; top:12px; font-family:var(--serif); font-size:14px; letter-spacing:.1em; color:var(--ink); z-index:3; background:rgba(251,250,247,.82); padding:2px 10px; border-radius:2px; }
-  .ba-cell.before .ba-lab{ left:12px; }
-  .ba-cell.after  .ba-lab{ right:12px; }
 
   .case-body{ padding:22px; }
   .case-title{ font-family:var(--mincho); font-weight:500; font-size:18px; line-height:1.6; letter-spacing:.04em; margin-bottom:12px; }
@@ -424,14 +420,27 @@
 </div>
 
 <script>
-/* ---------------- case data (from the rough) ---------------- */
+/* =========================================================================
+   【写真の入れ方】
+   各症例に img: を1行足すだけです。images/ に入れたファイル名を、
+   拡張子まで「そのまま正確に」書いてください。
+
+     例）  {course:"Standard", who:"30代 女性", tags:["分け目"],
+             img:"IMG_5383.JPG",           ← Before/After 合成済みの写真1枚
+             title:"…", desc:"…"},
+
+   ・Before/After が1枚に合成された画像を、そのまま横幅いっぱいに表示します
+   ・大文字・小文字は区別されます（.JPG と .jpg は別物として扱われます）
+   ・img を書かなければ images/caseNN.png（→.jpg）を自動で探します
+   　※ 現在は case01.png 〜 case20.png を自動表示しているため、
+   　　 通常は img: を書く必要はありません
+   ========================================================================= */
+
 const CASES = [
   {course:"Standard", who:"30代 女性", tags:["分け目"],
    title:"髪は太いが、分け目の幅が広いことが悩み",
-   // ↓ descの先頭に画像のタグを追加します
-   desc:"<img src='images/IMG_5383.JPG' style='width:100%; display:block; margin-bottom:12px;'>髪が黒く太めで地肌との色差が出やすいケース。色味と太さに合わせて色素は濃いめ、ドットも毛根大サイズに調整。1時間／回・2回で完成しました。",
+   desc:"髪が黒く太めで地肌との色差が出やすいケース。色味と太さに合わせて色素は濃いめ、ドットも毛根大サイズに調整。1時間／回・2回で完成しました。",
    voice:"以前は分け目を左にすることしかできなかったので、分け目を変えたヘアスタイルも楽しめて嬉しいです。"},
-// ...
 
   {course:"Standard", who:"20代 女性", tags:["分け目","透け感"],
    title:"髪が細く、周りからも指摘されるように",
@@ -521,25 +530,37 @@ const CASES = [
    voice:"2回目施術の後からヘアファンデを使わなくなりました。勇気を出してお願いして本当によかったです。"}
 ];
 
-/* 各症例に固定の連番IDを付与（画像ファイル名に対応：case01, case02 …） */
+/* 各症例に固定の連番IDを付与（case01, case02 …） */
 CASES.forEach((c, idx) => c.id = "case" + String(idx + 1).padStart(2, "0"));
 
 /* ---------------- render ---------------- */
 const list = document.getElementById('caseList');
 
-/* Before/After セル。images/caseNN-before.jpg → .png → プレースホルダーの順に自動表示 */
-function baCell(c, kind){
-  const label = kind === "before" ? "Before" : "After";
-  const jpg = `images/${c.id}-${kind}.jpg`;
-  const png = `images/${c.id}-${kind}.png`;
-  const onerr = `if(!this.dataset.t){this.dataset.t=1;this.src='${png}';}`
-              + `else{this.style.display='none';this.nextElementSibling.style.display='flex';}`;
-  return `<div class="ba-cell ${kind}">
-            <span class="ba-lab">${label}</span>
-            <img src="${jpg}" alt="施術${kind === "before" ? "前" : "後"}" onerror="${onerr}">
-            <div class="ba-ph" style="display:none">${label.toUpperCase()}</div>
-          </div>`;
+/* 症例写真ブロック
+   1) img: にファイル名があれば、その画像を横幅いっぱいに表示
+   2) 無ければ images/caseNN.jpg（→.png）を自動で探す
+   3) どれも無ければプレースホルダー
+   ※ before:/after: を個別指定した場合も、そのまま2枚を縦に並べて表示します */
+function shotBlock(c){
+  const files = c.img ? [c.img]
+              : (c.before || c.after) ? [c.before, c.after].filter(Boolean)
+              : null;
+  if (files) {
+    return files.map(f => `<div class="shot">
+        <img src="images/${f}" alt="施術前後の比較" loading="lazy"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="shot-ph" style="display:none">NO IMAGE</div>
+      </div>`).join("");
+  }
+  /* 規則名 caseNN.png → caseNN.jpg → プレースホルダー */
+  const retry = `images/${c.id}.png`;
+  return `<div class="shot">
+      <img src="images/${c.id}.jpg" alt="施術前後の比較" loading="lazy"
+           onerror="if(!this.dataset.t){this.dataset.t=1;this.src='${retry}';}else{this.style.display='none';this.nextElementSibling.style.display='flex';}">
+      <div class="shot-ph" style="display:none">CASE PHOTO</div>
+    </div>`;
 }
+
 function render(filter){
   list.innerHTML = "";
   CASES.filter(c => filter==="all" || c.tags.includes(filter)).forEach((c,i)=>{
@@ -551,10 +572,7 @@ function render(filter){
         <span class="case-course">${c.course}</span>
         <span class="case-who">${c.who}</span>
       </div>
-      <div class="ba">
-        ${baCell(c, "before")}
-        ${baCell(c, "after")}
-      </div>
+      ${shotBlock(c)}
       <div class="case-body">
         <h3 class="case-title">${c.title}</h3>
         <p class="case-desc">${c.desc}</p>
