@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>頭皮アートメイク ｜ 手打ち式の自然な仕上がり</title>
+<title>頭皮アートメイク ｜ 自然な仕上がりの専門施術</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Zen+Old+Mincho:wght@400;500;600;700&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap" rel="stylesheet">
@@ -208,14 +208,18 @@
   .case-course{ font-family:var(--serif); font-size:12px; letter-spacing:.22em; text-transform:uppercase; color:var(--clay); font-weight:600; }
   .case-who{ font-family:var(--mincho); font-size:12px; letter-spacing:.14em; color:var(--white); background:var(--stone-deep); padding:5px 12px; border-radius:2px; }
 
-  /* 症例写真 — Before/After が合成済みの画像を、そのまま1枚で表示 */
-  .shot{ margin-top:16px; background:var(--sand); position:relative; }
-  .shot img{ width:100%; height:auto; display:block; }
-  .shot-ph{
-    aspect-ratio:3/2; display:flex; align-items:center; justify-content:center;
+  /* before / after frame — drop real photos into .ba-img */
+  .ba{ display:grid; grid-template-columns:1fr 1fr; margin:16px 0 0; position:relative; }
+  .ba-cell{ position:relative; aspect-ratio:3/4; background:var(--sand); overflow:hidden; }
+  .ba-cell img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .ba-ph{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
     background-image:radial-gradient(var(--stone) 1px, transparent 1.3px); background-size:12px 12px;
-    color:var(--stone-deep); font-family:var(--serif); font-size:11px; letter-spacing:.24em;
+    color:var(--stone-deep); font-family:var(--serif); font-size:11px; letter-spacing:.2em;
   }
+  .ba-lab{ position:absolute; top:12px; font-family:var(--serif); font-size:14px; letter-spacing:.1em; color:var(--ink); z-index:3; background:rgba(251,250,247,.82); padding:2px 10px; border-radius:2px; }
+  .ba-cell.before .ba-lab{ left:12px; }
+  .ba-cell.after  .ba-lab{ right:12px; }
 
   .case-body{ padding:22px; }
   .case-title{ font-family:var(--mincho); font-weight:500; font-size:18px; line-height:1.6; letter-spacing:.04em; margin-bottom:12px; }
@@ -286,13 +290,13 @@
   <header class="hero">
     <canvas id="dots"></canvas>
     <div class="hero-inner">
-      <span class="hero-brand">Hair Art Make</span>
+      <span class="hero-brand">Scalp Art Make</span>
       <h1>
-        分け目やつむじ、傷跡に<br>自然な密度感を
-        <span class="thin">頭皮アートメイク症例集</span>
+        分け目に、生え際に、<br>もう一度の密度を。
+        <span class="thin">頭皮アートメイク・プロフェッショナル</span>
       </h1>
       <p class="hero-lead">
-        地肌の透け感を、即日軽減。ヘアファンデーションや毎朝のセットに費やしていた時間を少しでも減らすための施術です。
+        地肌の透け感を、一つひとつのドットで自然に。ヘアファンデーションや毎朝のセットに費やしていた時間から、そっと解放するための施術です。
       </p>
       <div class="cred">
         <div class="cred-num">1000<small>+</small></div>
@@ -317,7 +321,7 @@
       <button class="chip" data-jump="分け目"><span class="dotmark"></span>分け目</button>
       <button class="chip" data-jump="つむじ"><span class="dotmark"></span>つむじ</button>
       <button class="chip" data-jump="生え際"><span class="dotmark"></span>生え際</button>
-      <button class="chip" data-jump="透け感"><span class="dotmark"></span>抜毛</button>
+      <button class="chip" data-jump="透け感"><span class="dotmark"></span>抜毛・透け</button>
       <button class="chip" data-jump="傷跡"><span class="dotmark"></span>傷跡</button>
       <button class="chip" data-jump="他院修正"><span class="dotmark"></span>他院修正</button>
     </div>
@@ -328,7 +332,7 @@
     <div class="head">
       <span class="eyebrow">Course</span>
       <h2>施術範囲で選ぶ、3つのコース</h2>
-      <p>お悩みの施術範囲と髪質・髪色に合わせ、ドットサイズや色味を設計します。</p>
+      <p>お悩みの広さと髪質に合わせ、ドットの密度と範囲を設計します。</p>
     </div>
 
     <div class="course">
@@ -336,8 +340,8 @@
         <div class="course-name">Standard<span>スタンダードコース</span></div>
         <div class="density d1"></div>
       </div>
-      <span class="tag">分け目の前側・部分的なお悩みに</span>
-      <p>分け目やつむじ、植毛採取部位の傷跡など、範囲を限定したお悩みに。髪の色味と太さに合わせて色素とドットを調整し、多くは1.5時間／回・2回程度で仕上げます。</p>
+      <span class="tag">分け目・部分的なお悩みに</span>
+      <p>分け目やつむじなど、範囲を限定したお悩みに。髪の色味と太さに合わせて色素とドットを調整し、多くは1時間／回・2回程度で仕上げます。</p>
     </div>
 
     <div class="course">
@@ -345,7 +349,7 @@
         <div class="course-name">Wide<span>ワイドコース</span></div>
         <div class="density d2"></div>
       </div>
-      <span class="tag">分け目やつむじ全体</span>
+      <span class="tag">横幅を広く・デザインを重視</span>
       <p>分け目を変えたい方や、横に広くカバーしたい方へ。全体のバランスを見ながらデザインし、未施術部分との境目が目立たないよう自然に馴染ませます。</p>
     </div>
 
@@ -385,19 +389,19 @@
   <!-- ================= PHILOSOPHY ================= -->
   <section class="section phil reveal">
     <span class="eyebrow">Our craft</span>
-    <h2>「自然」に見えることを<br>なにより大切にしています</h2>
+    <h2>「自然さ」は、<br>ドットの一粒から。</h2>
 
     <div class="phil-item">
-      <h3><em>01</em> ドットサイズの調整</h3>
-      <p>大きすぎるドットは不自然さや滲みの原因に。髪の色味・太さ、そして地肌の状態に合わせて、一点一点ドットサイズを見極めます。</p>
+      <h3><em>01</em> ドットサイズのコントロール</h3>
+      <p>大きすぎるドットは不自然さや滲みの原因に。髪の色味・太さ、そして地肌の状態に合わせて、一粒ずつサイズを見極めます。</p>
     </div>
     <div class="phil-item">
       <h3><em>02</em> 全体をデザインする</h3>
       <p>一部だけを埋めると、かえって境目が目立つことがあります。分け目やつむじの流れまで含めて、全体像から設計します。</p>
     </div>
     <div class="phil-item">
-      <h3><em>03</em> 頭皮ケアも含めて、二人三脚で</h3>
-      <p>ドットの発色はや仕上がりはその上に重なる皮膚の状態に左右されます。より綺麗な仕上がりを目指すため、ご自宅での保湿ケアも並行しながら施術を行います。</p>
+      <h3><em>03</em> 頭皮ケアも、二人三脚で</h3>
+      <p>ドットの発色は、その上に被さる皮膚のコンディションに左右されます。ご自宅での保湿ケアも並行しながら、仕上がりを育てます。</p>
     </div>
   </section>
 
@@ -405,37 +409,22 @@
   <section class="section cta reveal">
     <span class="eyebrow">Reservation</span>
     <h2>まずは、お悩みを<br>聞かせてください。</h2>
-    <p>仕上がりのイメージを丁寧に擦り合わせし、ご納得いただいた上で進めます。</p>
-    <!-- <div class="btns">
+    <p>仕上がりのイメージを丁寧にお伝えし、ご納得いただいた上で進めます。</p>
+    <div class="btns">
       <a class="btn btn-primary" href="#">ご予約・カウンセリング<span class="en">Booking</span></a>
       <a class="btn btn-ghost" href="#">LINEで相談する<span class="en">LINE</span></a>
-    </div> -->
+    </div>
   </section>
 
   <footer>
-    <div class="fb">Hair Art Make</div>
-    <small>頭皮アートメイク専門看護師</small>
+    <div class="fb">Scalp Art Make</div>
+    <small>頭皮アートメイク・プロフェッショナル</small>
   </footer>
 
 </div>
 
 <script>
-/* =========================================================================
-   【写真の入れ方】
-   各症例に img: を1行足すだけです。images/ に入れたファイル名を、
-   拡張子まで「そのまま正確に」書いてください。
-
-     例）  {course:"Standard", who:"30代 女性", tags:["分け目"],
-             img:"IMG_5383.JPG",           ← Before/After 合成済みの写真1枚
-             title:"…", desc:"…"},
-
-   ・Before/After が1枚に合成された画像を、そのまま横幅いっぱいに表示します
-   ・大文字・小文字は区別されます（.JPG と .jpg は別物として扱われます）
-   ・img を書かなければ images/caseNN.png（→.jpg）を自動で探します
-   　※ 現在は case01.png 〜 case20.png を自動表示しているため、
-   　　 通常は img: を書く必要はありません
-   ========================================================================= */
-
+/* ---------------- case data (from the rough) ---------------- */
 const CASES = [
   {course:"Standard", who:"30代 女性", tags:["分け目"],
    title:"髪は太いが、分け目の幅が広いことが悩み",
@@ -530,37 +519,25 @@ const CASES = [
    voice:"2回目施術の後からヘアファンデを使わなくなりました。勇気を出してお願いして本当によかったです。"}
 ];
 
-/* 各症例に固定の連番IDを付与（case01, case02 …） */
+/* 各症例に固定の連番IDを付与（画像ファイル名に対応：case01, case02 …） */
 CASES.forEach((c, idx) => c.id = "case" + String(idx + 1).padStart(2, "0"));
 
 /* ---------------- render ---------------- */
 const list = document.getElementById('caseList');
 
-/* 症例写真ブロック
-   1) img: にファイル名があれば、その画像を横幅いっぱいに表示
-   2) 無ければ images/caseNN.jpg（→.png）を自動で探す
-   3) どれも無ければプレースホルダー
-   ※ before:/after: を個別指定した場合も、そのまま2枚を縦に並べて表示します */
-function shotBlock(c){
-  const files = c.img ? [c.img]
-              : (c.before || c.after) ? [c.before, c.after].filter(Boolean)
-              : null;
-  if (files) {
-    return files.map(f => `<div class="shot">
-        <img src="images/${f}" alt="施術前後の比較" loading="lazy"
-             onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-        <div class="shot-ph" style="display:none">NO IMAGE</div>
-      </div>`).join("");
-  }
-  /* 規則名 caseNN.png → caseNN.jpg → プレースホルダー */
-  const retry = `images/${c.id}.png`;
-  return `<div class="shot">
-      <img src="images/${c.id}.jpg" alt="施術前後の比較" loading="lazy"
-           onerror="if(!this.dataset.t){this.dataset.t=1;this.src='${retry}';}else{this.style.display='none';this.nextElementSibling.style.display='flex';}">
-      <div class="shot-ph" style="display:none">CASE PHOTO</div>
-    </div>`;
+/* Before/After セル。images/caseNN-before.jpg → .png → プレースホルダーの順に自動表示 */
+function baCell(c, kind){
+  const label = kind === "before" ? "Before" : "After";
+  const jpg = `images/${c.id}-${kind}.jpg`;
+  const png = `images/${c.id}-${kind}.png`;
+  const onerr = `if(!this.dataset.t){this.dataset.t=1;this.src='${png}';}`
+              + `else{this.style.display='none';this.nextElementSibling.style.display='flex';}`;
+  return `<div class="ba-cell ${kind}">
+            <span class="ba-lab">${label}</span>
+            <img src="${jpg}" alt="施術${kind === "before" ? "前" : "後"}" onerror="${onerr}">
+            <div class="ba-ph" style="display:none">${label.toUpperCase()}</div>
+          </div>`;
 }
-
 function render(filter){
   list.innerHTML = "";
   CASES.filter(c => filter==="all" || c.tags.includes(filter)).forEach((c,i)=>{
@@ -572,7 +549,10 @@ function render(filter){
         <span class="case-course">${c.course}</span>
         <span class="case-who">${c.who}</span>
       </div>
-      ${shotBlock(c)}
+      <div class="ba">
+        ${baCell(c, "before")}
+        ${baCell(c, "after")}
+      </div>
       <div class="case-body">
         <h3 class="case-title">${c.title}</h3>
         <p class="case-desc">${c.desc}</p>
