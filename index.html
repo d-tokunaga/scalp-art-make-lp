@@ -134,22 +134,13 @@
     text-transform:uppercase; color:var(--clay); margin-bottom:14px; font-weight:600;
   }
   .concern p.sub{ font-size:13px; color:var(--ink-soft); margin-bottom:30px; }
-  .grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:11px; }
-  .chip{
-    appearance:none; border:1px solid var(--line); background:var(--white);
-    font-family:var(--mincho); font-size:15px; letter-spacing:.12em; color:var(--ink);
-    padding:20px 6px; border-radius:2px; cursor:pointer;
-    display:flex; flex-direction:column; align-items:center; gap:9px;
-    transition:.35s var(--ease);
-  }
-  .chip .dotmark{
-    width:26px; height:26px; border-radius:50%;
-    background-image:radial-gradient(var(--stone-deep) .8px, transparent 1px);
-    background-size:5px 5px; opacity:.7;
-    transition:.35s var(--ease);
-  }
-  .chip:hover, .chip:focus-visible{ background:var(--ink); color:var(--white); border-color:var(--ink); transform:translateY(-2px); }
-  .chip:hover .dotmark, .chip:focus-visible .dotmark{ background-image:radial-gradient(var(--clay-soft) .9px, transparent 1.1px); opacity:1; }
+  .grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--white); padding:8px; border-radius:3px; box-shadow:0 14px 34px -24px rgba(40,36,30,.5); }
+  .chip{ appearance:none; border:0; padding:0; margin:0; cursor:pointer; position:relative; overflow:hidden; background:var(--sand); aspect-ratio:1/1; display:block; transition:.4s var(--ease); }
+  .chip img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s var(--ease); }
+  .chip .clabel{ position:absolute; top:10px; left:0; right:0; z-index:2; text-align:center; font-family:var(--mincho); font-size:14px; letter-spacing:.14em; color:var(--ink); }
+  .chip::before{ content:""; position:absolute; inset:0 0 55% 0; z-index:1; pointer-events:none; background:linear-gradient(rgba(251,250,247,.72), rgba(251,250,247,0)); }
+  .chip:hover img, .chip:focus-visible img{ transform:scale(1.05); }
+  .chip:hover, .chip:focus-visible{ outline:0; }
 
   /* =========================================================
      COURSES — density encodes coverage
@@ -314,12 +305,12 @@
     </h2>
     <p class="sub">気になるお悩みから、近い症例をご覧いただけます。</p>
     <div class="grid" id="concernGrid">
-      <button class="chip" data-jump="分け目"><span class="dotmark"></span>分け目</button>
-      <button class="chip" data-jump="つむじ"><span class="dotmark"></span>つむじ</button>
-      <button class="chip" data-jump="生え際"><span class="dotmark"></span>生え際</button>
-      <button class="chip" data-jump="抜毛"><span class="dotmark"></span>抜毛</button>
-      <button class="chip" data-jump="傷跡"><span class="dotmark"></span>傷跡</button>
-      <button class="chip" data-jump="他院修正"><span class="dotmark"></span>他院修正</button>
+      <button class="chip" data-jump="分け目"><span class="clabel">分け目</span><img src="images/concern-wakeme.jpg" alt="分け目" loading="lazy"></button>
+      <button class="chip" data-jump="つむじ"><span class="clabel">つむじ</span><img src="images/concern-tsumuji.jpg" alt="つむじ" loading="lazy"></button>
+      <button class="chip" data-jump="生え際"><span class="clabel">生え際</span><img src="images/concern-haegiwa.jpg" alt="生え際" loading="lazy"></button>
+      <button class="chip" data-jump="抜毛"><span class="clabel">抜毛</span><img src="images/concern-batsumou.jpg" alt="抜毛" loading="lazy"></button>
+      <button class="chip" data-jump="傷跡"><span class="clabel">傷跡</span><img src="images/concern-kizuato.jpg" alt="傷跡" loading="lazy"></button>
+      <button class="chip" data-jump="他院修正"><span class="clabel">他院修正</span><img src="images/concern-shusei.jpg" alt="他院修正" loading="lazy"></button>
     </div>
   </section>
 
